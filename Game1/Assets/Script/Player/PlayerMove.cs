@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            rb.AddForce(_input.X * MoveSpeed, 0f, _input.Y * MoveSpeed);
+            rb.AddForce(-_input.X * MoveSpeed, 0f,-_input.Y * MoveSpeed);
         }
     }
 }

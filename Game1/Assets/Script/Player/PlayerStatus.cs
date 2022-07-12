@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    public int Player_HP;
-
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-
-
+        if (other.name == "Bullet(Clone)")
+        {
+            Die();
+        }
     }
     public void Die()
     {
         gameObject.SetActive(false);
     }
 
-
+    
 }
