@@ -7,6 +7,7 @@ public class BulletSpawner : MonoBehaviour
     public GameObject BulletPrefab;
     public Transform Player;
 
+    private bool check;
     void Start()
     {
     }
@@ -16,6 +17,19 @@ public class BulletSpawner : MonoBehaviour
     void Update()
     {
         Delta += Time.deltaTime;
+        if (Delta >= 0.5f&& check == true)
+        {
+            Delta = 0;
+            //_RANDOM = Random.Range(1.0f, 3.0f);
+
+            GameObject bullet = Instantiate(BulletPrefab, transform.position,transform.rotation);
+            bullet.transform.LookAt(Player);
+        }
+        
+        if(check == false)
+        {
+            gameObject.transform.Rotate(0, 0, 10);
+        }
         
     }
 
@@ -23,15 +37,15 @@ public class BulletSpawner : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (Delta >= 0.5f)
-            {
-                Delta = 0;
-                //_RANDOM = Random.Range(1.0f, 3.0f);
-
-                GameObject bullet = Instantiate(BulletPrefab, transform);
-                bullet.transform.LookAt(Player);
-            }
+            check = true;
         }
-        
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            check = false;
+        }
+    }
+
 }
